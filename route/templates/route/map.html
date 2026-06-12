@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Route Planner</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="{% static 'route/css/map.css' %}">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Fuel Route Planner</h1>
+                <p class="subtitle">US routes with cost-efficient fuel stops</p>
+            </div>
+
+            <form id="route-form">
+                {% csrf_token %}
+                <label for="start">Start location</label>
+                <input id="start" name="start" type="text" placeholder="New York, NY" required>
+
+                <label for="end">End location</label>
+                <input id="end" name="end" type="text" placeholder="Chicago, IL" required>
+
+                <button type="submit" id="submit-btn">Plan Route</button>
+            </form>
+
+            <div id="error" class="error hidden"></div>
+
+            <section id="summary" class="summary hidden">
+                <h2>Trip Summary</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span>Distance</span>
+                        <strong id="distance">-</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span>Drive time</span>
+                        <strong id="duration">-</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span>Fuel used</span>
+                        <strong id="fuel-used">-</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span>Fuel cost</span>
+                        <strong id="total-cost">-</strong>
+                    </div>
+                </div>
+                <div class="metric"><span>Fuel stops</span><strong id="stop-count">-</strong></div>
+            </section>
+
+            <section id="stops" class="stops hidden">
+                <h2>Fuel Stops</h2>
+                <ul id="stops-list"></ul>
+            </section>
+        </aside>
+
+        <main class="map-wrap">
+            <div id="map"></div>
+
+            <div id="map-toolbar" class="map-toolbar hidden">
+                <div class="route-title" id="route-title">Route</div>
+                <div class="toolbar-stats">
+                    <span class="stat-chip" id="chip-distance">-</span>
+                    <span class="stat-chip" id="chip-duration">-</span>
+                    <span class="stat-chip" id="chip-fuel">-</span>
+                    <span class="stat-chip" id="chip-cost">-</span>
+                    <span class="stat-chip" id="chip-stops">-</span>
+                </div>
+                <div class="toolbar-legend">
+                    <span class="legend-pill start">A Start</span>
+                    <span class="legend-pill end">B End</span>
+                    <span class="legend-pill fuel">Fuel</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{% static 'route/js/map.js' %}"></script>
+</body>
+</html>

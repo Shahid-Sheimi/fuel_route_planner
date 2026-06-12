@@ -1,0 +1,10 @@
+__pycache__
+*.pyc
+.git
+.gitignore
+.env
+.venv
+venv
+db.sqlite3
+data/geocode_cache.json
+*.md
