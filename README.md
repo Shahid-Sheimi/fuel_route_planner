@@ -72,7 +72,8 @@ FuelRouteApi/
 ### 1. Clone and set up the environment
 
 ```bash
-cd FuelRouteApi
+git clone https://github.com/Shahid-Sheimi/fuel_route_planner.git
+cd fuel_route_planner
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
